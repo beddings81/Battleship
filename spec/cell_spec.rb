@@ -2,7 +2,6 @@ require './lib/ship'
 require './lib/cell'
 
 RSpec.describe Cell do
-
   it 'exist' do
     cell = Cell.new("B4")
 
@@ -58,23 +57,19 @@ RSpec.describe Cell do
     expect(cell.fired_upon?).to eq(false)
   end
 
+  it 'can lose health when fired upon' do
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+
+    expect(cruiser).to be_a(Ship)
+    cell.place_ship(cruiser)
+    expect(cell.ship).to eq(cruiser)
+    expect(cell.empty?).to eq(false)
+    expect(cell.fired_upon?).to eq(false)
+    expect(cell.ship.health).to eq(3)
+
+    cell.fire_upon
+    expect(cell.ship.health).to eq(2)
+    expect(cell.fired_upon?).to eq(true)
+  end
 end
-
-#cell = Cell.new("B4")
-# # => #<Cell:0x00007f84f0ad4720...>
-
-# cruiser = Ship.new("Cruiser", 3)
-# # => #<Ship:0x00007f84f0891238...>
-
-#cell.place_ship(cruiser)
-
-#  cell.fired_upon?
-# # => false
-
-#  cell.fire_upon
-
-#  cell.ship.health
-# # => 2
-
-# cell.fired_upon?
-# # => true
