@@ -72,4 +72,55 @@ RSpec.describe Cell do
     expect(cell.ship.health).to eq(2)
     expect(cell.fired_upon?).to eq(true)
   end
+
+  it 'can render as "." if it has not been fired upon' do
+    cell_1 = Cell.new("B4")
+    expect(cell_1.render).to eq(".")
+  end
+
+  it 'can render as "M" if it is fired upon but missed' do
+    cell_1 = Cell.new("B4")
+    expect(cell_1.render).to eq(".")
+
+    cell_1.fire_upon
+
+    expect(cell_1.render).to eq("M")
+  end
 end
+
+
+
+
+
+#  cell_2 = Cell.new("C3")
+# # => #<Cell:0x00007f84f0b29d10...>
+#
+#  cruiser = Ship.new("Cruiser", 3)
+# # => #<Ship:0x00007f84f0ad4fb8...>
+#
+# cell_2.place_ship(cruiser)
+#
+#  cell_2.render
+# # => "."
+#
+# # Indicate that we want to show a ship with the optional argument
+#  cell_2.render(true)
+# # => "S"
+#
+#  cell_2.fire_upon
+#
+#  cell_2.render
+# # => "H"
+#
+# cruiser.sunk?
+# # => false
+#
+# cruiser.hit
+#
+#  cruiser.hit
+#
+#  cruiser.sunk?
+# # => true
+#
+# cell_2.render
+# # => "X"
