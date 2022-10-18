@@ -7,7 +7,11 @@ attr_reader :coordinate, :ship
   end
 
   def empty?
-    true
+    if @ship == nil
+      return true
+    else
+      return false
+    end
   end
 
   def place_ship(ship)

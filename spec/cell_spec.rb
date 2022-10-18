@@ -21,7 +21,7 @@ RSpec.describe Cell do
     expect(cell.ship).to be(nil)
   end
 
-  it 'can be empty' do
+  it 'is empty by default' do
     cell = Cell.new("B4")
 
     expect(cell.empty?).to eq(true)
@@ -34,6 +34,16 @@ RSpec.describe Cell do
     expect(cruiser).to be_a(Ship)
     cell.place_ship(cruiser)
     expect(cell.ship).to eq(cruiser)
+  end
+
+  it 'can place ship' do
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+
+    expect(cruiser).to be_a(Ship)
+    cell.place_ship(cruiser)
+    expect(cell.ship).to eq(cruiser)
+    expect(cell.empty?).to eq(false)
   end
 
 end
