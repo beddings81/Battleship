@@ -26,26 +26,36 @@ RSpec.describe Ship do
     expect(cruiser.health).to eq(cruiser.length)
   end
 
+  it 'has a default sink value of false' do
+    cruiser = Ship.new("Cruiser", 3)
+
+    expect(cruiser.sunk?).to be(false)
+  end
+
+  it 'can hit a ship' do
+    cruiser = Ship.new("Cruiser", 3)
+    cruiser.hit
+
+    expect(cruiser.health).to eq(2)
+  end
+
+  it 'can get hit mulitple times' do
+    cruiser = Ship.new("Cruiser", 3)
+    cruiser.hit
+    cruiser.hit
+
+    expect(cruiser.health).to eq(1)
+    expect(cruiser.sunk?).to be(false)
+  end
+
+  it 'can sink the ship' do
+    cruiser = Ship.new("Cruiser", 3)
+    cruiser.hit
+    cruiser.hit
+    cruiser.hit
+
+    expect(cruiser.health).to eq(0)
+    expect(cruiser.sunk?).to be(true)
+  end
+
 end
-
-
-#  cruiser.sunk?
-# #=> false
-#
-#  cruiser.hit
-#
-#  cruiser.health
-# #=> 2
-#
-#  cruiser.hit
-#
-#  cruiser.health
-# #=> 1
-#
-#  cruiser.sunk?
-# #=> false
-#
-#  cruiser.hit
-#
-#  cruiser.sunk?
-# #=> true
