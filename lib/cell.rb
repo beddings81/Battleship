@@ -31,4 +31,13 @@ class Cell
       ship.hit
     end
   end
+
+  def render
+    if @ship == nil && @fired_upon == true
+      return "M"
+    elsif @ship == nil
+      return "."
+    end
+
+  end
 end
