@@ -13,19 +13,22 @@ RSpec.describe Ship do
 
     expect(cruiser.name).to eq("Cruiser")
   end
+
+  it 'has a length' do
+    cruiser = Ship.new("Cruiser", 3)
+
+    expect(cruiser.length).to eq(3)
+  end
+
+  it 'has a default health' do
+    cruiser = Ship.new("Cruiser", 3)
+
+    expect(cruiser.health).to eq(cruiser.length)
+  end
+
 end
 
 
-
-#  cruiser.name
-# #=> "Cruiser"
-#
-#  cruiser.length
-# #=> 3
-#
-#  cruiser.health
-# #=> 3
-#
 #  cruiser.sunk?
 # #=> false
 #
