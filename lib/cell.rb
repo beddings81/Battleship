@@ -6,8 +6,12 @@ attr_reader :coordinate
 
   end
 
+  def ship
+  end
 
-
+  def empty?
+    true
+  end
 
 
 end
