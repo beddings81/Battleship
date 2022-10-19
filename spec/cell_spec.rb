@@ -147,8 +147,6 @@ RSpec.describe Cell do
     cell_2.place_ship(cruiser)
     cell_2.fire_upon
 
-    # cruiser.hit
-
     expect(cruiser.health).to eq(2)
     expect(cruiser.sunk?).to be(false)
 
@@ -163,5 +161,4 @@ RSpec.describe Cell do
     expect(cruiser.sunk?).to be(true)
     expect(cell_2.render).to eq("X")
   end
-
 end
