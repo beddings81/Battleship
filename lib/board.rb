@@ -1,4 +1,5 @@
 class Board
+
   def initialize
   end
 
@@ -21,5 +22,14 @@ class Board
       "D3" => cell = Cell.new("D3"),
       "D4" => cell = Cell.new("D4")
     }
+  end
+
+  def valid_coordinate?(coordinate)
+    @coordinate = cells.keys
+    if cells.keys.include?(coordinate)
+      return true
+    else
+      return false
+    end
   end
 end
