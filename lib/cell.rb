@@ -1,5 +1,3 @@
-require './lib/ship'
-
 class Cell
   attr_reader :coordinate, :ship
 
@@ -28,16 +26,23 @@ class Cell
   def fire_upon
     @fired_upon = true
     if empty? == false
-      ship.hit
+      @ship.hit
     end
   end
 
-  def render
-    if @ship == nil && @fired_upon == true
-      return "M"
-    elsif @ship == nil
-      return "."
+  def render(show = true)
+    if show
+      if fired_upon? == false && empty? == false
+        return "S"
+      elsif fired_upon? == true && empty? == true
+        return "M"
+      elsif fired_upon? == true && @ship.sunk? == true
+        return "X"
+      elsif fired_upon? == true && empty? == false
+        return "H"
+      else fired_upon? == false
+          return "."
+      end
     end
-
   end
 end
