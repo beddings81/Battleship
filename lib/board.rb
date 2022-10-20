@@ -31,7 +31,39 @@ class Board
     end
   end
 
-  def valid_placement?(ship, ship_coordinate)
-    ship_coordinate.length == ship.length
+  def valid_placement?(ship, ship_coordinates)
+      if consecutive_spaces(ship_coordinates)
+        return false
+      else ship.length == ship_coordinate.length
+        return true
+      end
+  end
+
+  def consecutive_spaces(ship_coordinates)
+    letters = []
+    numbers = []
+    ship_coordinates.each do |coordinate|
+      letters << coordinate[0]
+      numbers << coordinate[1]
+      if letters.uniq.length == 1
+        (numbers[-1].to_i - numbers[0].to_i) - 1 == numbers.length
+      end
+    end
   end
 end
+
+# def horizontal_letters?(coordinate_array)
+#   array_of_coordinates.map do |coordinate_letter|
+#     puts coordinate_letter[0]
+#   end
+#   # all the letter values of coordinates
+#   # think what is unique (the letter)
+# end
+
+# def vertical_numbers?(coordinate_array)
+#     array_of_coordinates.map do |coordinate_number|
+#       puts coordinate_number[1]
+#     end
+#     #all the number values of coordinates
+#     # think what is unique (the numbers)
+# end
