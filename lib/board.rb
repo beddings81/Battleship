@@ -41,4 +41,11 @@ class Board
     end
     coordinate_letters.uniq.length == 1
   end
+
+  def vertical_coordinates(coordinate_array)
+    coordinate_numbers = coordinate_array.map do |coordinate|
+      coordinate[1]
+    end
+    coordinate_numbers.uniq.length == 1
+  end
 end
