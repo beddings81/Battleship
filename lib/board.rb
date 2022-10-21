@@ -47,7 +47,20 @@ class Board
           consecutive_numbers = false
         end
       end
-      consecutive_numbers 
+      consecutive_numbers
+    elsif vertical_coordinates(coordinate_array) == true
+      letters = coordinate_array.map do |coordinate|
+        coordinate[0].ord
+      end
+      consecutive_letters = true
+        letters.each_cons(2) do |letter_pairs|
+          if letter_pairs[0].ord + 1 != letter_pairs[1]
+            consecutive_letters = false
+          end
+        end
+      consecutive_letters
+    else
+      false
     end
   end
 
