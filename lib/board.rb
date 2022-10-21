@@ -31,53 +31,53 @@ class Board
     end
   end
 
-  def valid_placement?(ship, ship_coordinates)
-    # if ship_length(ship, ship_coordinates)
-    #   # return false
-    # else consecutive_spaces(ship_coordinates)
-    #   # return true
-    #
-    # end
-      if consecutive_spaces(ship_coordinates)
-        return false
-      elsif ship.length == ship_coordinates.length
-        return true
-      end
-  end
-
-  def consecutive_spaces(ship_coordinates)
-    letters = []
-    numbers = []
-    ship_coordinates.each do |coordinate|
-      letters << coordinate[0]
-      numbers << coordinate[1]
-      if letters.uniq.length == 1
-        #wont capture A1 B1
-        (numbers[-1].to_i - numbers[0].to_i) - 1 == numbers.length
-        # this will always be false
-      end
-      letters
-      numbers
+  def valid_placement?(ship, ship_coordinate)
+    if consecutive_spaces(ship_coordinate) && ship_coordinate.length == ship.length
+      true
+    else
+      false
     end
   end
 
-  # def ship_length(ship, ship_coordinates)
-  #   ship.length != ship_coordinates.length
-  # end
+  def consecutive_spaces(coordinate_array)
+    if horizontal_coordinates(coordinate_array) == true
+      numbers = coordinate_array.map do |coordinate|
+        coordinate[1].to_i
+      end
+      consecutive_numbers = true
+      numbers.each_cons(2) do |number_pairs|
+        if number_pairs[0] + 1 != number_pairs[1]
+          consecutive_numbers = false
+        end
+      end
+      consecutive_numbers
+    elsif vertical_coordinates(coordinate_array) == true
+      letters = coordinate_array.map do |coordinate|
+        coordinate[0].ord
+      end
+      consecutive_letters = true
+        letters.each_cons(2) do |letter_pairs|
+          if letter_pairs[0].ord + 1 != letter_pairs[1]
+            consecutive_letters = false
+          end
+        end
+      consecutive_letters
+    else
+      false
+    end
+  end
+
+  def horizontal_coordinates(coordinate_array)
+    coordinate_letters = coordinate_array.map do |coordinate|
+      coordinate[0]
+    end
+    coordinate_letters.uniq.length == 1
+  end
+
+  def vertical_coordinates(coordinate_array)
+    coordinate_numbers = coordinate_array.map do |coordinate|
+      coordinate[1]
+    end
+    coordinate_numbers.uniq.length == 1
+  end
 end
-
-# def horizontal_letters?(coordinate_array)
-#   array_of_coordinates.map do |coordinate_letter|
-#     puts coordinate_letter[0]
-#   end
-#   # all the letter values of coordinates
-#   # think what is unique (the letter)
-# end
-
-# def vertical_numbers?(coordinate_array)
-#     array_of_coordinates.map do |coordinate_number|
-#       puts coordinate_number[1]
-#     end
-#     #all the number values of coordinates
-#     # think what is unique (the numbers)
-# end

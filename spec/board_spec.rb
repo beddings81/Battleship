@@ -39,6 +39,30 @@ RSpec.describe Board do
    expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
  end
 
+  it 'can test if coordinates are horizontal' do
+    board = Board.new
+    expect(board.horizontal_coordinates(["A1", "A2", "A3"])).to be(true)
+    expect(board.horizontal_coordinates(["A1", "B2", "A3"])).to be(false)
+  end
+
+  it 'can test if coordinates are vertical' do
+    board = Board.new
+    expect(board.vertical_coordinates(["A1", "B1", "C1"])).to be(true)
+    expect(board.vertical_coordinates(["A1", "B2", "A3"])).to be(false)
+  end
+
+  it 'can check for horiztonal consecutiveness' do
+    board = Board.new
+    expect(board.consecutive_spaces(["A1", "A2", "A3"])).to be(true)
+    expect(board.consecutive_spaces(["A1", "B2", "A3"])).to be(false)
+  end
+
+  it 'can check for vertical consecutiveness' do
+    board = Board.new
+    expect(board.consecutive_spaces(["A1", "B1", "C1"])).to be(true)
+    expect(board.consecutive_spaces(["A2", "B1", "C1"])).to be(false)
+  end
+
  it 'can validate a ship placement based on consecutiveness' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
