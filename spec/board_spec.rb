@@ -39,7 +39,7 @@ RSpec.describe Board do
    expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
  end
 
- it 'can validate a ship placement based on consecutiveness' do
+ xit 'can validate a ship placement based on consecutiveness' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -54,7 +54,7 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["C1", "B1"])).to eq(false)
   end
 
-  it 'can validate a ship placement based on being diagonal' do
+  xit 'can validate a ship placement based on being diagonal' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -67,7 +67,7 @@ RSpec.describe Board do
     expect(board.valid_placement?(submarine, ["C2", "D3"])).to eq(false)
   end
 
-  it 'can have a valid ship placement' do
+  xit 'can have a valid ship placement' do
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
