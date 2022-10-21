@@ -34,4 +34,11 @@ class Board
   def valid_placement?(ship, ship_coordinate)
     ship_coordinate.length == ship.length
   end
+
+  def horizontal_coordinates(coordinate_array)
+    coordinate_letters = coordinate_array.map do |coordinate|
+      coordinate[0]
+    end
+    coordinate_letters.uniq.length == 1
+  end
 end
