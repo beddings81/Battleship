@@ -43,9 +43,20 @@ RSpec.describe Board do
     board = Board.new
     expect(board.horizontal_coordinates(["A1", "A2", "A3"])).to be(true)
   end
+
   it 'can will fail if coordinates are not horizontal' do
     board = Board.new
     expect(board.horizontal_coordinates(["A1", "B2", "A3"])).to be(false)
+  end
+
+  it 'can test if coordinates are vertical' do
+    board = Board.new
+    expect(board.vertical_coordinates(["A1", "B1", "C1"])).to be(true)
+  end
+  
+  it 'can will fail if coordinates are not vertical' do
+    board = Board.new
+    expect(board.vertical_coordinates(["A1", "B2", "A3"])).to be(false)
   end
 
  xit 'can validate a ship placement based on consecutiveness' do
