@@ -32,8 +32,11 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinate)
-    ship_coordinate.length == ship.length
-    # we will want our consecutive spaces method AND ^^ to be true
+    if consecutive_spaces(ship_coordinate) && ship_coordinate.length == ship.length
+      true
+    else
+      false
+    end
   end
 
   def consecutive_spaces(coordinate_array)
