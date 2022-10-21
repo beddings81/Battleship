@@ -33,6 +33,22 @@ class Board
 
   def valid_placement?(ship, ship_coordinate)
     ship_coordinate.length == ship.length
+    # we will want our consecutive spaces method AND ^^ to be true
+  end
+
+  def consecutive_spaces(coordinate_array)
+    if horizontal_coordinates(coordinate_array) == true
+      numbers = coordinate_array.map do |coordinate|
+        coordinate[1].to_i
+      end
+      consecutive_numbers = true
+      numbers.each_cons(2) do |number_pairs|
+        if number_pairs[0] + 1 != number_pairs[1]
+          consecutive_numbers = false
+        end
+      end
+      consecutive_numbers 
+    end
   end
 
   def horizontal_coordinates(coordinate_array)
