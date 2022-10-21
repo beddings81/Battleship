@@ -80,4 +80,7 @@ class Board
     end
     coordinate_numbers.uniq.length == 1
   end
+
+  def place(ship, coordinate_array)
+  end
 end
