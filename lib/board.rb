@@ -32,9 +32,15 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinates)
+    # if ship_length(ship, ship_coordinates)
+    #   # return false
+    # else consecutive_spaces(ship_coordinates)
+    #   # return true
+    #
+    # end
       if consecutive_spaces(ship_coordinates)
         return false
-      else ship.length == ship_coordinate.length
+      elsif ship.length == ship_coordinates.length
         return true
       end
   end
@@ -46,10 +52,18 @@ class Board
       letters << coordinate[0]
       numbers << coordinate[1]
       if letters.uniq.length == 1
+        #wont capture A1 B1
         (numbers[-1].to_i - numbers[0].to_i) - 1 == numbers.length
+        # this will always be false
       end
+      letters
+      numbers
     end
   end
+
+  # def ship_length(ship, ship_coordinates)
+  #   ship.length != ship_coordinates.length
+  # end
 end
 
 # def horizontal_letters?(coordinate_array)
