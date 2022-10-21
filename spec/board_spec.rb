@@ -118,4 +118,29 @@ RSpec.describe Board do
     expect(cell_3 = board.cells["A3"]).to be_a(Cell)
     expect(board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to eq (true)
   end
+
+  it 'can determine when a ship is on consecutive cells' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    cell_1 = Cell.new("A1")
+    cell_2 = Cell.new("A2")
+    cell_3 = Cell.new("A3")
+
+    expect(board).to be_a(Board)
+    expect(cruiser).to be_a(Ship)
+    expect(cell_1).to be_a(Cell)
+    expect(cell_2).to be_a(Cell)
+    expect(cell_3).to be_a(Cell)
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    expect(cell_1 = board.cells["A1"]).to be_a(Cell)
+    expect(cell_2 = board.cells["A2"]).to be_a(Cell)
+    expect(cell_3 = board.cells["A3"]).to be_a(Cell)
+
+    expect(cell_1.ship).to eq(cruiser)
+    expect(cell_2.ship).to eq(cruiser)
+    expect(cell_3.ship).to eq(cruiser)
+    expect(cell_3.ship).to eq(cell_2.ship)
+  end
 end
