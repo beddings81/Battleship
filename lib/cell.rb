@@ -31,18 +31,35 @@ class Cell
   end
 
   def render(show_ship = false)
-    if show_ship == false
       if fired_upon? == true && empty? == true
         return "M"
       elsif fired_upon? == true && @ship.sunk? == true
         return "X"
       elsif fired_upon? == true && empty? == false
         return "H"
-      else fired_upon? == false
-          return "."
+      elsif empty? == false && show_ship = true
+          return "S"
+      else
+        return "."
       end
-    else
-      return "S"
     end
-  end
 end
+
+
+#   def render(show_ship = false)
+#     if show_ship == false
+#       if fired_upon? == true && empty? == true
+#         return "M"
+#       elsif fired_upon? == true && @ship.sunk? == true
+#         return "X"
+#       elsif fired_upon? == true && empty? == false
+#         return "H"
+#       else fired_upon? == false
+#           return "."
+#       end
+#     else 
+#       #show_ship == true
+#       return "S"
+#     end
+#   end
+# end

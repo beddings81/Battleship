@@ -147,4 +147,85 @@ RSpec.describe Board do
     board.place(cruiser, ["A1", "A2", "A3"])
     expect(board.empty_cells(["A1", "B1"])).to eq(false)
   end
+
+  it 'can render a board' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+
+    expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+
+    board.place(cruiser, ["A1", "A2", "A3"]) 
+  
+    expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+  end
+
+  it 'can place a ship and miss' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    cell_1 = Cell.new("B1")
+
+    board.place(cruiser, ["A1", "A2", "A3"]) 
+    expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+
+    cell_1.fire_upon
+    expect(cell_1.fired_upon?).to eq(true)
+    expect(cell_1.empty?).to eq(true)
+    expect(cell_1.render).to eq("M")
+    expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB M . . . \nC . . . . \nD . . . . \n")
+  end
+
+  it 'can place a ship and hit' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    cell_1 = Cell.new("A1")
+
+    board.place(cruiser, ["A1", "A2", "A3"]) 
+    expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+
+    cell_1.fire_upon
+    expect(cell_1.fired_upon?).to eq(true)
+    expect(cell_1.empty?).to eq(false)
+    expect(cell_1.render).to eq("H")
+    expect(board.render(true)).to eq("  1 2 3 4 \nA H S S . \nB . . . . \nC . . . . \nD . . . . \n")
+  end
+
+  it 'can sink a ship' do
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    cell_1 = Cell.new("A1")
+    cell_2 = Cell.new("A2")
+    cell_3 = Cell.new("A3")
+
+    cell_1.place_ship(cruiser)
+    cell_2.place_ship(cruiser)
+    cell_3.place_ship(cruiser)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+
+    cell_1.fire_upon
+    expect(cell_1.fired_upon?).to eq(true)
+    expect(cell_1.empty?).to eq(false)
+    expect(cell_1.render).to eq("H")
+    expect(cruiser.sunk?).to be(false)
+
+    # expect(board.render).to eq("  1 2 3 4 \nA H S S . \nB . . . . \nC . . . . \nD . . . . \n")
+
+    cell_2.fire_upon
+    expect(cell_2.fired_upon?).to eq(true)
+    expect(cell_2.empty?).to eq(false)
+    expect(cell_2.render).to eq("H")
+    expect(cruiser.sunk?).to be(false)
+
+    expect(board.render(true)).to eq("  1 2 3 4 \nA H X T . \nB . . . . \nC . . . . \nD . . . . \n")
+
+    cell_3.fire_upon
+    expect(cell_3.fired_upon?).to eq(true)
+    expect(cell_3.empty?).to eq(false)
+    expect(cell_1.render).to eq("H")
+    expect(cell_2.render).to eq("H")
+    expect(cell_3.render).to eq("H")
+    expect(cruiser.sunk?).to be(false)
+
+    expect(board.render(true)).to eq("  1 2 3 4 \nA X X X . \nB . . . . \nC . . . . \nD . . . . \n")
+  end
 end

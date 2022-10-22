@@ -1,3 +1,5 @@
+require './lib/cell'
+
 class Board
   attr_reader :cells
 
@@ -98,4 +100,47 @@ class Board
       false
     end
   end
+
+  def render(show_ships = false)
+    if show_ships == false
+       "  1 2 3 4 \n" +
+       "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" +
+       "B #{@cells["B1"].render} #{@cells["B2"].render} #{@cells["B3"].render} #{@cells["B4"].render} \n" +
+       "C #{@cells["C1"].render} #{@cells["C2"].render} #{@cells["C3"].render} #{@cells["C4"].render} \n" +
+       "D #{@cells["D1"].render} #{@cells["D2"].render} #{@cells["D3"].render} #{@cells["D4"].render} \n"
+    else
+      
+      # board.place(ship, coordinate_array)
+      # we have access to the coordinates
+      # iterate through them to place in cell?
+
+      "  1 2 3 4 \n" +
+      "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" +
+      "B #{@cells["B1"].render} #{@cells["B2"].render} #{@cells["B3"].render} #{@cells["B4"].render} \n" +
+      "C #{@cells["C1"].render} #{@cells["C2"].render} #{@cells["C3"].render} #{@cells["C4"].render} \n" +
+      "D #{@cells["D1"].render} #{@cells["D2"].render} #{@cells["D3"].render} #{@cells["D4"].render} \n"
+    end
+  end
 end
+
+
+  #“M” if the cell has been fired upon and it does not contain a ship (the shot was a miss).
+  # "."" if the cell has not been fired upon.
+  # “H” if the cell has been fired upon and it contains a ship (the shot was a hit).
+  # “X” if the cell has been fired upon and its ship has been sunk.
+  # Note that all of the cells that contain that sunken ship should render as an “X”, 
+      #not just the cell that resulted in the ship being sunk.
+
+      # try string interpolation for each cell
+      # still need 1,2,3,4 
+      #may have to iterate through @cells - might be easier/faster  way to print the cells below
+
+# in game: gets.chomp A1 (fire upon A1) --> then we get a M X or H 
+# and then we re-render the board for next turn
+
+
+# "  1 2 3 4 \n" +
+      # "A #{@cells["A1"].render(true)} #{@cells["A2"].render(true)} #{@cells["A3"].render(true)} #{@cells["A4"].render(true)} \n" +
+      # "B #{@cells["B1"].render(true)} #{@cells["B2"].render(true)} #{@cells["B3"].render(true)} #{@cells["B4"].render(true)} \n" +
+      # "C #{@cells["C1"].render(true)} #{@cells["C2"].render(true)} #{@cells["C3"].render(true)} #{@cells["C4"].render(true)} \n" +
+      # "D #{@cells["D1"].render(true)} #{@cells["D2"].render(true)} #{@cells["D3"].render(true)} #{@cells["D4"].render(true)} \n"
