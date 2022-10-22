@@ -32,7 +32,7 @@ class Board
   end
 
   def valid_placement?(ship, ship_coordinate)
-    if consecutive_spaces(ship_coordinate) && ship_coordinate.length == ship.length
+    if consecutive_spaces(ship_coordinate) && ship_coordinate.length == ship.length && empty_cells(ship_coordinate)
       true
     else
       false
@@ -79,5 +79,23 @@ class Board
       coordinate[1]
     end
     coordinate_numbers.uniq.length == 1
+  end
+
+  def place(ship, coordinate_array)
+    if valid_placement?(ship, coordinate_array)
+      coordinate_array.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
+      end
+    end
+  end
+
+  def empty_cells(coordinate_array)
+    if coordinate_array.all? do |coordinate|
+        @cells[coordinate].empty? == true
+      end
+      true
+    else 
+      false
+    end
   end
 end
