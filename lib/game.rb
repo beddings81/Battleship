@@ -31,5 +31,6 @@ attr_reader :player, :computer
 
   def setup_board
     @player.place_cruiser
+    @player.place_submarine
   end
 end
