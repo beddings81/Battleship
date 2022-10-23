@@ -22,4 +22,15 @@ class Player
     @board.place(cruiser, cruiser_coordinate)
     puts @board.render(true)
   end
+
+  def place_submarine
+    puts "Enter the squares for the Submarine (2 spaces):"
+    submarine_coordinate = gets.chomp.upcase.split
+    while @board.valid_placement?(submarine, submarine_coordinate) == false
+      puts "Those are invalid coordinates. Please try again!"
+      submarine_coordinate = gets.chomp.upcase.split
+    end
+    @board.place(submarine, submarine_coordinate)
+    puts @board.render(true)
+  end
 end
