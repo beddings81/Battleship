@@ -33,4 +33,24 @@ class Player
     @board.place(submarine, submarine_coordinate)
     puts @board.render(true)
   end
+
+  def computer_place_cruiser
+    coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4" ]
+    cruiser_coordinate = [] 
+      while @board.valid_placement?(cruiser, cruiser_coordinate) == false
+        cruiser_coordinate = coordinates_array.sample(3)
+      end
+    @board.place(cruiser, cruiser_coordinate)
+    puts @board.render(true)
+  end
+
+  def computer_place_submarine
+    coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4" ]
+    submarine_coordinate = coordinates_array.sample(2)
+      while @board.valid_placement?(submarine, submarine_coordinate) == false
+        submarine_coordinate = coordinates_array.sample(2)
+      end
+    @board.place(submarine, submarine_coordinate)
+    puts @board.render(true)
+  end
 end
