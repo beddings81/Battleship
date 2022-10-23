@@ -3,25 +3,33 @@ require './lib/cell'
 require './lib/board'
 
 class Game
-attr_reader :cruiser, :submarine, :board
+attr_reader :player, :computer
   def initialize
-    @cruiser = Ship.new("Cruiser", 3)
-    @submarine = Ship.new("Submarine", 2)
-    @board = Board.new
-    # @play = "p"
-    # @quit = "q"
+    @player = Player.new
+    @computer = Player.new
   end
 
   def main_menu
-    p "Welcome to BATTLESHIP"
-    p "Enter p to play. Enter q to quit."
+    puts "Welcome to BATTLESHIP"
+    puts "Enter p to play. Enter q to quit."
     response = gets.chomp
     if response == "p"
-      p "hi"
+      start_game
     elsif response == "q"
-      p "bye"
+      puts "bye"
     else
-      p "Invalid input"
+      puts "Invalid input"
     end
+  end
+
+  def start_game
+    puts "I have laid out my ships on the grid."
+    puts "You now need to lay out your two ships."
+    puts "The Cruiser is three units long and the Submarine is two units long."
+    puts player.board.render
+  end
+
+  def setup_board
+    @player.place_cruiser
   end
 end
