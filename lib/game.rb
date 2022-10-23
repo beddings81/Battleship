@@ -30,7 +30,18 @@ attr_reader :player, :computer
   end
 
   def setup_board
+    @player.computer_place_cruiser
+    @player.computer_place_submarine
     @player.place_cruiser
     @player.place_submarine
   end
+
+
+#   def turn
+# displaying the boards
+# Player choosing a coordinate to fire on
+# Computer choosing a coordinate to fire on
+# Reporting the result of the Player’s shot
+# Reporting the result of the Computer’s shot
+#   end
 end
