@@ -4,6 +4,7 @@ require './lib/board'
 
 class Game
 attr_reader :player, :computer
+
   def initialize
     @player = Player.new
     @computer = Player.new
@@ -36,12 +37,15 @@ attr_reader :player, :computer
     @player.place_submarine
   end
 
+  def turn
+    puts "=============COMPUTER BOARD============="
+    puts @computer.board_cpu.render
+    puts "==============PLAYER BOARD=============="
+    puts @player.board.render(true)
+  end
 
-#   def turn
-# displaying the boards
 # Player choosing a coordinate to fire on
 # Computer choosing a coordinate to fire on
 # Reporting the result of the Player’s shot
 # Reporting the result of the Computer’s shot
-#   end
 end
