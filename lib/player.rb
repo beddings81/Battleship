@@ -4,7 +4,7 @@ require './lib/board'
 require './lib/game'
 
 class Player
-  attr_reader :cruiser, :submarine, :board
+  attr_reader :cruiser, :submarine, :board_cpu, :board
 
   def initialize
     @cruiser = Ship.new("Cruiser", 3)
