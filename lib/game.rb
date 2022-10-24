@@ -25,6 +25,7 @@ attr_reader :player, :computer
 
   def start_game
     puts "I have laid out my ships on the grid."
+    @player.computer_board(@computer.board)
     @computer.computer_place_cruiser
     @computer.computer_place_submarine
     puts "You now need to lay out your two ships."
@@ -39,7 +40,7 @@ attr_reader :player, :computer
 
   def turn
     puts "=============COMPUTER BOARD============="
-    puts @computer.board_cpu.render(true)
+    puts @computer.board.render(true)
     puts "==============PLAYER BOARD=============="
     puts @player.board.render(true)
     @player.shots
