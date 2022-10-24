@@ -58,10 +58,9 @@ class Player
     puts @board.render(true)
   end
 
-  def shots
+  def player_shots
     puts "Enter the coordinate for your shot:"
     player_shot = gets.chomp.upcase
-    # if not valid coordinate
     while @board.valid_coordinate?(player_shot) == false
       puts "This is not a valid coordinate, please enter a valid coordinate:"
       player_shot = gets.chomp.upcase
@@ -69,23 +68,13 @@ class Player
     if @board.valid_coordinate?(player_shot) == true
       @board_cpu.cells[player_shot].fire_upon
       puts @board_cpu.render
-      if @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == true
-        puts "Your shot on #{player_shot} was miss."
-      else @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == false
+      if @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == false && @board_cpu.cells[player_shot].ship.sunk? == true
+        puts "Your shot on #{player_shot} sunk my battleship!"
+      elsif @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == false
         puts "Your shot on #{player_shot} was a hit!"
-      # else @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == false && @board_cpu.cells[player_shot].ship.sunk? == true
-      #   puts "Your shot on #{player_shot} sunk my battleship!"
+      else
+        puts "Your shot on #{player_shot} was miss."
       end
     end
   end
 end
-
-# def place_submarine
-#   puts "Enter the squares for the Submarine (2 spaces):"
-#   submarine_coordinate = gets.chomp.upcase.split
-#   while @board.valid_placement?(submarine, submarine_coordinate) == false
-#     puts "Those are invalid coordinates. Please try again!"
-#     submarine_coordinate = gets.chomp.upcase.split
-#   end
-#   @board.place(submarine, submarine_coordinate)
-#   puts @board.render(true)
