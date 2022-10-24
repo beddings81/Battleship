@@ -42,7 +42,7 @@ class Player
         cruiser_coordinate = coordinates_array.sample(3)
       end
     @board_cpu.place(cruiser, cruiser_coordinate)
-    puts @board_cpu.render
+    puts @board_cpu.render(true)
   end
 
   def computer_place_submarine
@@ -52,6 +52,63 @@ class Player
         submarine_coordinate = coordinates_array.sample(2)
       end
     @board_cpu.place(submarine, submarine_coordinate)
-    puts @board_cpu.render
+    puts @board_cpu.render(true)
+  end
+
+  def shots
+    puts "Enter the coordinate for your shot:"
+    player_shot = gets.chomp.upcase
+    # if not valid coordinate
+
+    while @board.valid_coordinate?(player_shot) == false
+      puts "This is not a valid coordinate, please enter a valid coordinate:"
+      player_shot = gets.chomp.upcase
+      if @board.valid_coordinate?(player_shot) == true
+        @board_cpu.cells[player_shot].fire_upon
+        puts @board_cpu.render(true)
+        if @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == true
+          puts "Your shot on #{player_shot} was a miss"
+        # elsif
+          #feeedback for X
+          #fired_upon? == true && @ship.sunk? == true && empty? == false
+        # else
+         #feedback for H
+         #fired_upon? == true && empty? == false
+        end
+      end
+    end
   end
 end
+        # def place_submarine
+        #   puts "Enter the squares for the Submarine (2 spaces):"
+        #   submarine_coordinate = gets.chomp.upcase.split
+        #   while @board.valid_placement?(submarine, submarine_coordinate) == false
+        #     puts "Those are invalid coordinates. Please try again!"
+        #     submarine_coordinate = gets.chomp.upcase.split
+        #   end
+        #   @board.place(submarine, submarine_coordinate)
+        #   puts @board.render(true)
+        # end
+      
+    # # if it was hit
+    # puts "Your shot on A4 was a miss."
+    # #if it was a miss
+    # puts "My shot on C1 was a miss."
+
+# def valid_coordinate?(coordinate)
+#   coordinate_names = @cells.keys
+#   if @cells.keys.include?(coordinate)
+#     return true
+#   else
+#     return false
+#   end
+
+# def place_submarine
+#   puts "Enter the squares for the Submarine (2 spaces):"
+#   submarine_coordinate = gets.chomp.upcase.split
+#   while @board.valid_placement?(submarine, submarine_coordinate) == false
+#     puts "Those are invalid coordinates. Please try again!"
+#     submarine_coordinate = gets.chomp.upcase.split
+#   end
+#   @board.place(submarine, submarine_coordinate)
+#   puts @board.render(true)
