@@ -24,14 +24,14 @@ attr_reader :player, :computer
 
   def start_game
     puts "I have laid out my ships on the grid."
+    @computer.computer_place_cruiser
+    @computer.computer_place_submarine
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long."
-    puts player.board.render
+    puts @player.board.render
   end
 
   def setup_board
-    @player.computer_place_cruiser
-    @player.computer_place_submarine
     @player.place_cruiser
     @player.place_submarine
   end
