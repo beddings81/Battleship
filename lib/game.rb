@@ -43,11 +43,6 @@ attr_reader :player, :computer
     puts @computer.board.render(true)
     puts "==============PLAYER BOARD=============="
     puts @player.board.render(true)
-    @player.shots
+    @player.player_shots
   end
-
-# Player choosing a coordinate to fire on
-# Computer choosing a coordinate to fire on
-# Reporting the result of the Player’s shot
-# Reporting the result of the Computer’s shot
 end
