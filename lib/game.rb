@@ -39,9 +39,10 @@ attr_reader :player, :computer
 
   def turn
     puts "=============COMPUTER BOARD============="
-    puts @computer.board_cpu.render
+    puts @computer.board_cpu.render(true)
     puts "==============PLAYER BOARD=============="
     puts @player.board.render(true)
+    @player.shots
   end
 
 # Player choosing a coordinate to fire on
