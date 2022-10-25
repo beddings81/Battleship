@@ -4,12 +4,15 @@ require './lib/board'
 require './lib/game'
 
 class Player
-  attr_reader :cruiser, :submarine, :board_cpu, :board
+  attr_reader :cruiser, :submarine, :board_cpu, :board, :player_sunk, :computer_sunk
 
   def initialize
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
     @board = Board.new
+    @computer_sunk = 0
+    @player_sunk = 0
+
   end
 
   def place_cruiser
@@ -70,8 +73,10 @@ class Player
       puts @board_cpu.render
       if @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == false && @board_cpu.cells[player_shot].ship.sunk? == true
         puts "Your shot on #{player_shot} sunk my battleship!"
+        @computer_sunk += 1
       elsif @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == false
         puts "Your shot on #{player_shot} was a hit!"
+        @computer_sunk += 1
       else
         puts "Your shot on #{player_shot} was miss."
       end
@@ -80,15 +85,20 @@ class Player
 
   def computer_shots(on_player)
     coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4" ]
-    computer_coordinate = []
-    computer_coordinate << coordinates_array.delete_at(rand(coordinates_array.length))
-    @board.cells[computer_coordinate[0]].fire_upon
+    computer_coordinate = coordinates_array.delete_at(rand(coordinates_array.length))
+    until @board.valid_coordinate?(computer_coordinate) && @board.cells[computer_coordinate].fired_upon? == false
+      computer_coordinate = coordinates_array.delete_at(rand(coordinates_array.length))
+    end
+    # computer_coordinate << coordinates_array.delete_at(rand(coordinates_array.length))
+    @board.cells[computer_coordinate].fire_upon
     puts @board.render
   #if
-    if @board.cells[computer_coordinate[0]].fired_upon? == true && @board.cells[computer_coordinate[0]].empty? == false && @board.cells[computer_coordinate[0]].ship.sunk? == true
+    if @board.cells[computer_coordinate].fired_upon? == true && @board.cells[computer_coordinate].empty? == false && @board.cells[computer_coordinate].ship.sunk? == true
       puts "My shot on #{computer_coordinate} sunk your battleship!"
-    elsif @board.cells[computer_coordinate[0]].fired_upon? == true && @board.cells[computer_coordinate[0]].empty? == false
+      @player_sunk += 1
+    elsif @board.cells[computer_coordinate].fired_upon? == true && @board.cells[computer_coordinate].empty? == false
       puts "My shot on #{computer_coordinate} was a hit!"
+      @player_sunk += 1
     else
       puts "My shot on #{computer_coordinate} was miss."
     end
