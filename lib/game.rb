@@ -52,28 +52,17 @@ attr_reader :player, :computer, :player_sunk, :computer_sunk
     until player.computer_sunk == 5 || player.player_sunk == 5
       @player.player_shots
       break if player.computer_sunk == 5 || player.player_sunk == 5
-      @player.computer_shots(@computer.board)
+      @player.computer_shots
       @computer_sunk += player.computer_sunk
       @player_sunk += player.player_sunk
-      # break if player.computer_sunk == 5 || player.player_sunk == 5
     end
   end
 
   def winner
-    # player turn
     if player.computer_sunk == 5
       puts "I WIN! Better luck next time!"
     else
       puts "I LOST. You're a computer, you cheated!"
     end
   end
-
-  # def computer_wins
-  #   # computer turn
-  #   players_sunk? == 2
-  #   puts "You lose!"
-  # end
 end
-
-# @player.cruiser.sunk? <<< ended the game after player sunk computer aka computer lost
-# @computer.cruiser.sunk?
