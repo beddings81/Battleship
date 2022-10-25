@@ -1,13 +1,16 @@
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
+require './lib/player'
 
 class Game
-attr_reader :player, :computer
+attr_reader :player, :computer, :player_sunk, :computer_sunk
 
   def initialize
     @player = Player.new
     @computer = Player.new
+    @player_sunk = 0
+    @computer_sunk = 0
   end
 
   def main_menu
@@ -17,9 +20,11 @@ attr_reader :player, :computer
     if response == "p"
       start_game
     elsif response == "q"
-      puts "bye"
+      puts "Goodbye!"
+      exit
     else
-      puts "Invalid input"
+      puts "Invalid input: Enter p to play. Enter q to quit"
+      main_menu
     end
   end
 
@@ -43,22 +48,31 @@ attr_reader :player, :computer
     puts @computer.board.render(true)
     puts "==============PLAYER BOARD=============="
     puts @player.board.render(true)
-    while @player.cruiser.sunk? == false && @player.submarine.sunk? == false
+
+    until player.computer_sunk == 5 || player.player_sunk == 5
       @player.player_shots
+      break if player.computer_sunk == 5 || player.player_sunk == 5
       @player.computer_shots(@computer.board)
+      @computer_sunk += player.computer_sunk
+      @player_sunk += player.player_sunk
+      # break if player.computer_sunk == 5 || player.player_sunk == 5
     end
   end
 
-  def player_wins
+  def winner
     # player turn
-    # if .sunk? == true
-    #   put "You are awinner"
-    # else continue with turn
+    if player.computer_sunk == 5
+      puts "I WIN! Better luck next time!"
+    else
+      puts "I LOST. You're a computer, you cheated!"
+    end
   end
 
-  def computer_wins
-    # computer return
-  end
+  # def computer_wins
+  #   # computer turn
+  #   players_sunk? == 2
+  #   puts "You lose!"
+  # end
 end
 
 # @player.cruiser.sunk? <<< ended the game after player sunk computer aka computer lost
