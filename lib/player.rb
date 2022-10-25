@@ -19,7 +19,7 @@ class Player
     puts "Enter the squares for the Cruiser (3 spaces):"
     cruiser_coordinate = gets.chomp.upcase.split
     while @board.valid_placement?(cruiser, cruiser_coordinate) == false
-      puts "Those are invalid coordinates. Please try again!"
+      puts "Those are invalid coordinates. Please try again:"
       cruiser_coordinate = gets.chomp.upcase.split
     end
     @board.place(cruiser, cruiser_coordinate)
@@ -30,7 +30,7 @@ class Player
     puts "Enter the squares for the Submarine (2 spaces):"
     submarine_coordinate = gets.chomp.upcase.split
     while @board.valid_placement?(submarine, submarine_coordinate) == false
-      puts "Those are invalid coordinates. Please try again!"
+      puts "Those are invalid coordinates. Please try again:"
       submarine_coordinate = gets.chomp.upcase.split
     end
     @board.place(submarine, submarine_coordinate)
@@ -89,7 +89,7 @@ class Player
 
     def validate_fired_upon
       while @board_cpu.cells[@player_shot].fired_upon? == true
-        puts "You have already fired upon this coordinate, please choose another coordinate"
+        puts "You have already fired upon this coordinate, please choose another coordinate:"
         @player_shot = gets.chomp.upcase
         validate_the_coordinate
       end
