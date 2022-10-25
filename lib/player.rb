@@ -12,6 +12,7 @@ class Player
     @board = Board.new
     @computer_sunk = 0
     @player_sunk = 0
+    @coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
 
   end
 
@@ -42,18 +43,18 @@ class Player
   end
 
   def computer_place_cruiser
-    coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4" ]
-    cruiser_coordinate = []
-      while @board.valid_placement?(cruiser, cruiser_coordinate) == false
-        cruiser_coordinate = coordinates_array.sample(3)
-      end
-    @board.place(cruiser, cruiser_coordinate)
-    puts @board.render(true)
-  end
+   coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
+   cruiser_coordinate = []
+     while @board.valid_placement?(cruiser, cruiser_coordinate) == false
+       cruiser_coordinate = coordinates_array.sample(3)
+     end
+   @board.place(cruiser, cruiser_coordinate)
+   puts @board.render(true)
+ end
 
   def computer_place_submarine
-    coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4" ]
-    submarine_coordinate = coordinates_array.sample(2)
+    coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
+    submarine_coordinate = []
       while @board.valid_placement?(submarine, submarine_coordinate) == false
         submarine_coordinate = coordinates_array.sample(2)
       end
@@ -83,16 +84,14 @@ class Player
     end
   end
 
-  def computer_shots(on_player)
-    coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4" ]
-    computer_coordinate = coordinates_array.delete_at(rand(coordinates_array.length))
+  def computer_shots
+    computer_coordinate = ""
     until @board.valid_coordinate?(computer_coordinate) && @board.cells[computer_coordinate].fired_upon? == false
-      computer_coordinate = coordinates_array.delete_at(rand(coordinates_array.length))
+      computer_coordinate = @coordinates_array.delete(@coordinates_array.sample)
     end
-    # computer_coordinate << coordinates_array.delete_at(rand(coordinates_array.length))
     @board.cells[computer_coordinate].fire_upon
+    puts "==============PLAYER BOARD=============="
     puts @board.render
-  #if
     if @board.cells[computer_coordinate].fired_upon? == true && @board.cells[computer_coordinate].empty? == false && @board.cells[computer_coordinate].ship.sunk? == true
       puts "My shot on #{computer_coordinate} sunk your battleship!"
       @player_sunk += 1
@@ -103,14 +102,13 @@ class Player
       puts "My shot on #{computer_coordinate} was miss."
     end
   end
-
 end
 # @player.computer_shots(@computer.board) <<<<<<<This is the computers board!!!!!!
 #Fix computer shots feedback array
 #Add: The computer should not fire on a space that has already been fired on.
 #Add puts statement saying you already fired upon that coordinate for player
 # def computer_place_submarine
-#   coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4" ]
+#   coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
 #   submarine_coordinate = coordinates_array.sample(2)
 #     while @board.valid_placement?(submarine, submarine_coordinate) == false
 #       submarine_coordinate = coordinates_array.sample(2)
