@@ -80,9 +80,11 @@ class Player
 
   def computer_shots(on_player)
     coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4" ]
-    computer_coordinate = coordinates_array.sample(1)
+    computer_coordinate = []
+    computer_coordinate << coordinates_array.delete_at(rand(coordinates_array.length))
     @board.cells[computer_coordinate[0]].fire_upon
     puts @board.render
+  #if
     if @board.cells[computer_coordinate[0]].fired_upon? == true && @board.cells[computer_coordinate[0]].empty? == false && @board.cells[computer_coordinate[0]].ship.sunk? == true
       puts "My shot on #{computer_coordinate} sunk your battleship!"
     elsif @board.cells[computer_coordinate[0]].fired_upon? == true && @board.cells[computer_coordinate[0]].empty? == false
@@ -95,6 +97,8 @@ class Player
 end
 # @player.computer_shots(@computer.board) <<<<<<<This is the computers board!!!!!!
 #Fix computer shots feedback array
+#Add: The computer should not fire on a space that has already been fired on.
+#Add puts statement saying you already fired upon that coordinate for player
 # def computer_place_submarine
 #   coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4" ]
 #   submarine_coordinate = coordinates_array.sample(2)
