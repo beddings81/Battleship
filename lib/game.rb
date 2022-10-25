@@ -23,18 +23,20 @@ attr_reader :player, :computer, :player_sunk, :computer_sunk
       puts "Goodbye!"
       exit
     else
-      puts "Invalid input: Enter p to play. Enter q to quit"
+      puts "Invalid input: Enter p to play. Enter q to quit."
       main_menu
     end
   end
 
   def start_game
     puts "I have laid out my ships on the grid."
+    puts "=============COMPUTER BOARD============="
     @player.computer_board(@computer.board)
     @computer.computer_place_cruiser
     @computer.computer_place_submarine
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long."
+    puts "==============PLAYER BOARD=============="
     puts @player.board.render
   end
 
@@ -48,32 +50,20 @@ attr_reader :player, :computer, :player_sunk, :computer_sunk
     puts @computer.board.render(true)
     puts "==============PLAYER BOARD=============="
     puts @player.board.render(true)
-
     until player.computer_sunk == 5 || player.player_sunk == 5
       @player.player_shots
       break if player.computer_sunk == 5 || player.player_sunk == 5
-      @player.computer_shots(@computer.board)
+      @player.computer_shots
       @computer_sunk += player.computer_sunk
       @player_sunk += player.player_sunk
-      # break if player.computer_sunk == 5 || player.player_sunk == 5
     end
   end
 
   def winner
-    # player turn
     if player.computer_sunk == 5
-      puts "I WIN! Better luck next time!"
+      puts "YOU WIN smarty pants, you're smarter than a computer!"
     else
-      puts "I LOST. You're a computer, you cheated!"
+      puts "I WIN. Good luck next time human!"
     end
   end
-
-  # def computer_wins
-  #   # computer turn
-  #   players_sunk? == 2
-  #   puts "You lose!"
-  # end
 end
-
-# @player.cruiser.sunk? <<< ended the game after player sunk computer aka computer lost
-# @computer.cruiser.sunk?
