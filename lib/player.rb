@@ -13,7 +13,6 @@ class Player
     @computer_sunk = 0
     @player_sunk = 0
     @coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
-
   end
 
   def place_cruiser
@@ -63,26 +62,38 @@ class Player
   end
 
   def player_shots
-    puts "Enter the coordinate for your shot:"
-    player_shot = gets.chomp.upcase
-    while @board.valid_coordinate?(player_shot) == false
-      puts "This is not a valid coordinate, please enter a valid coordinate:"
-      player_shot = gets.chomp.upcase
-    end
-    if @board.valid_coordinate?(player_shot) == true
-      @board_cpu.cells[player_shot].fire_upon
+      puts "Enter the coordinate for your shot:"
+      @player_shot = gets.chomp.upcase
+      validate_the_coordinate
+      @board_cpu.cells[@player_shot].fire_upon
+      puts "=============COMPUTER BOARD============="
       puts @board_cpu.render
-      if @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == false && @board_cpu.cells[player_shot].ship.sunk? == true
-        puts "Your shot on #{player_shot} sunk my battleship!"
+      if @board_cpu.cells[@player_shot].fired_upon? == true && @board_cpu.cells[@player_shot].empty? == false && @board_cpu.cells[@player_shot].ship.sunk? == true
+        puts "Your shot on #{@player_shot} sunk my battleship!"
         @computer_sunk += 1
-      elsif @board_cpu.cells[player_shot].fired_upon? == true && @board_cpu.cells[player_shot].empty? == false
-        puts "Your shot on #{player_shot} was a hit!"
+      elsif @board_cpu.cells[@player_shot].fired_upon? == true && @board_cpu.cells[@player_shot].empty? == false
+        puts "Your shot on #{@player_shot} was a hit!"
         @computer_sunk += 1
       else
-        puts "Your shot on #{player_shot} was miss."
+        puts "Your shot on #{@player_shot} was miss."
       end
     end
-  end
+
+    def validate_the_coordinate
+      while @board_cpu.valid_coordinate?(@player_shot) == false
+        puts "This is not a valid coordinate, please enter a valid coordinate:"
+        @player_shot = gets.chomp.upcase
+      end
+      validate_fired_upon unless @board_cpu.cells[@player_shot].nil?
+    end
+
+    def validate_fired_upon
+      while @board_cpu.cells[@player_shot].fired_upon? == true
+        puts "You have already fired upon this coordinate, please choose another coordinate"
+        @player_shot = gets.chomp.upcase
+        validate_the_coordinate
+      end
+    end
 
   def computer_shots
     computer_coordinate = ""
@@ -103,16 +114,3 @@ class Player
     end
   end
 end
-# @player.computer_shots(@computer.board) <<<<<<<This is the computers board!!!!!!
-#Fix computer shots feedback array
-#Add: The computer should not fire on a space that has already been fired on.
-#Add puts statement saying you already fired upon that coordinate for player
-# def computer_place_submarine
-#   coordinates_array = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
-#   submarine_coordinate = coordinates_array.sample(2)
-#     while @board.valid_placement?(submarine, submarine_coordinate) == false
-#       submarine_coordinate = coordinates_array.sample(2)
-#     end
-#   @board.place(submarine, submarine_coordinate)
-#   puts @board.render(true)
-# end
