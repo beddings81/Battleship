@@ -44,5 +44,6 @@ attr_reader :player, :computer
     puts "==============PLAYER BOARD=============="
     puts @player.board.render(true)
     @player.player_shots
+    @player.computer_shots(@computer.board)
   end
 end
