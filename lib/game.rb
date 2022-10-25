@@ -30,11 +30,13 @@ attr_reader :player, :computer, :player_sunk, :computer_sunk
 
   def start_game
     puts "I have laid out my ships on the grid."
+    puts "=============COMPUTER BOARD============="
     @player.computer_board(@computer.board)
     @computer.computer_place_cruiser
     @computer.computer_place_submarine
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long."
+    puts "==============PLAYER BOARD=============="
     puts @player.board.render
   end
 
@@ -48,7 +50,6 @@ attr_reader :player, :computer, :player_sunk, :computer_sunk
     puts @computer.board.render(true)
     puts "==============PLAYER BOARD=============="
     puts @player.board.render(true)
-
     until player.computer_sunk == 5 || player.player_sunk == 5
       @player.player_shots
       break if player.computer_sunk == 5 || player.player_sunk == 5

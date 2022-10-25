@@ -109,6 +109,3 @@ class Board
     "D #{@cells["D1"].render(show_ships)} #{@cells["D2"].render(show_ships)} #{@cells["D3"].render(show_ships)} #{@cells["D4"].render(show_ships)} \n"
   end
 end
-
-# in game: gets.chomp A1 (fire upon A1) --> then we get a M X or H 
-# and then we re-render the board for next turn

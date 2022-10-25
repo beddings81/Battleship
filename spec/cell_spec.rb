@@ -2,35 +2,32 @@ require './lib/ship'
 require './lib/cell'
 
 RSpec.describe Cell do
+  let(:cell) { Cell.new("B4") }
+
   it 'exist' do
-    cell = Cell.new("B4")
 
     expect(cell).to be_a(Cell)
   end
 
   it 'has a coordinate' do
-    cell = Cell.new("B4")
 
     expect(cell).to be_a(Cell)
     expect(cell.coordinate).to eq("B4")
   end
 
   it 'has a ship' do
-    cell = Cell.new("B4")
 
     expect(cell).to be_a(Cell)
     expect(cell.ship).to be(nil)
   end
 
   it 'is empty by default' do
-    cell = Cell.new("B4")
 
     expect(cell).to be_a(Cell)
     expect(cell.empty?).to eq(true)
   end
 
   it 'can place ship' do
-    cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
 
     expect(cell).to be_a(Cell)
@@ -42,7 +39,6 @@ RSpec.describe Cell do
   end
 
   it 'can place ship' do
-    cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
 
     expect(cell).to be_a(Cell)
@@ -55,7 +51,6 @@ RSpec.describe Cell do
   end
 
   it 'can be fired upon' do
-    cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
 
     expect(cell).to be_a(Cell)
@@ -69,7 +64,6 @@ RSpec.describe Cell do
   end
 
   it 'can lose health when fired upon' do
-    cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
 
     expect(cell).to be_a(Cell)
@@ -103,6 +97,7 @@ RSpec.describe Cell do
     expect(cell_1.render).to eq(".")
 
     cell_1.fire_upon
+
     expect(cell_1.fired_upon?).to eq(true)
     expect(cell_1.empty?).to eq(true)
     expect(cell_1.render).to eq("M")

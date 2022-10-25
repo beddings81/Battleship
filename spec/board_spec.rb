@@ -37,21 +37,25 @@ RSpec.describe Board do
   end
 
   it 'can test if coordinates are horizontal' do
+
     expect(board.horizontal_coordinates(["A1", "A2", "A3"])).to be(true)
     expect(board.horizontal_coordinates(["A1", "B2", "A3"])).to be(false)
   end
 
   it 'can test if coordinates are vertical' do
+
     expect(board.vertical_coordinates(["A1", "B1", "C1"])).to be(true)
     expect(board.vertical_coordinates(["A1", "B2", "A3"])).to be(false)
   end
 
   it 'can check for horiztonal consecutiveness' do
+
     expect(board.consecutive_spaces(["A1", "A2", "A3"])).to be(true)
     expect(board.consecutive_spaces(["A1", "B2", "A3"])).to be(false)
   end
 
   it 'can check for vertical consecutiveness' do
+
     expect(board.consecutive_spaces(["A1", "B1", "C1"])).to be(true)
     expect(board.consecutive_spaces(["A2", "B1", "C1"])).to be(false)
   end
@@ -121,6 +125,7 @@ RSpec.describe Board do
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
+
     expect(cell_1.empty?).to eq(false)
     expect(cell_2.empty?).to eq(false)
     expect(cell_3.empty?).to eq(false)
@@ -130,15 +135,18 @@ RSpec.describe Board do
 
   it 'can place a ship and miss' do
     cruiser = Ship.new("Cruiser", 3)
-  
+
     board.place(cruiser, ["A1", "A2", "A3"])
+
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
     cell_4 = board.cells["B1"]
-  
+
     expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+
     cell_4.fire_upon
+
     expect(cell_4.fired_upon?).to eq(true)
     expect(cell_4.empty?).to eq(true)
     expect(cell_4.render).to eq("M")
@@ -147,19 +155,20 @@ RSpec.describe Board do
 
   it 'can place a ship and hit' do
     cruiser = Ship.new("Cruiser", 3)
-  
+
     board.place(cruiser, ["C1", "C2", "C3"])
+
     cell_1 = board.cells["C1"]
     cell_2 = board.cells["C2"]
     cell_3 = board.cells["C3"]
-    #this is the player who places the cruiser
+
     expect(board.render(true)).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC S S S . \nD . . . . \n")
 
     cell_1.fire_upon
+
     expect(cell_1.fired_upon?).to eq(true)
     expect(cell_1.empty?).to eq(false)
     expect(cell_1.render).to eq("H")
-    # this is what the computer sees
     expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC H . . . \nD . . . . \n")
   end
 
@@ -167,11 +176,13 @@ RSpec.describe Board do
     cruiser = Ship.new("Cruiser", 3)
 
     board.place(cruiser, ["D2", "D3", "D4"])
+
     cell_1 = board.cells["D2"]
     cell_2 = board.cells["D3"]
     cell_3 = board.cells["D4"]
 
     cell_1.fire_upon
+
     expect(cell_1.fired_upon?).to eq(true)
     expect(cell_1.empty?).to eq(false)
     expect(cell_1.render).to eq("H")
@@ -179,6 +190,7 @@ RSpec.describe Board do
     expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . H . . \n")
 
     cell_2.fire_upon
+
     expect(cell_2.fired_upon?).to eq(true)
     expect(cell_2.empty?).to eq(false)
     expect(cell_2.render).to eq("H")
@@ -186,6 +198,7 @@ RSpec.describe Board do
     expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . H H . \n")
 
     cell_3.fire_upon
+    
     expect(cell_3.fired_upon?).to eq(true)
     expect(cell_3.empty?).to eq(false)
     expect(cell_1.render).to eq("X")
