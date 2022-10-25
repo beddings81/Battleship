@@ -43,6 +43,23 @@ attr_reader :player, :computer
     puts @computer.board.render(true)
     puts "==============PLAYER BOARD=============="
     puts @player.board.render(true)
-    @player.player_shots
+    while @player.cruiser.sunk? == false && @player.submarine.sunk? == false
+      @player.player_shots
+      @player.computer_shots(@computer.board)
+    end
+  end
+
+  def player_wins
+    # player turn
+    # if .sunk? == true
+    #   put "You are awinner"
+    # else continue with turn
+  end
+
+  def computer_wins
+    # computer return
   end
 end
+
+# @player.cruiser.sunk? <<< ended the game after player sunk computer aka computer lost
+# @computer.cruiser.sunk?
