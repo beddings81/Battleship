@@ -23,7 +23,7 @@ attr_reader :player, :computer, :player_sunk, :computer_sunk
       puts "Goodbye!"
       exit
     else
-      puts "Invalid input: Enter p to play. Enter q to quit"
+      puts "Invalid input: Enter p to play. Enter q to quit."
       main_menu
     end
   end
@@ -60,9 +60,9 @@ attr_reader :player, :computer, :player_sunk, :computer_sunk
 
   def winner
     if player.computer_sunk == 5
-      puts "I WIN! Better luck next time!"
+      puts "YOU WIN smarty pants, you're smarter than a computer!"
     else
-      puts "I LOST. You're a computer, you cheated!"
+      puts "I WIN. Good luck next time human!"
     end
   end
 end
