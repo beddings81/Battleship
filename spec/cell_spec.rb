@@ -5,24 +5,20 @@ RSpec.describe Cell do
   let(:cell) { Cell.new("B4") }
 
   it 'exist' do
-
     expect(cell).to be_a(Cell)
   end
 
   it 'has a coordinate' do
-
     expect(cell).to be_a(Cell)
     expect(cell.coordinate).to eq("B4")
   end
 
   it 'has a ship' do
-
     expect(cell).to be_a(Cell)
     expect(cell.ship).to be(nil)
   end
 
   it 'is empty by default' do
-
     expect(cell).to be_a(Cell)
     expect(cell.empty?).to eq(true)
   end

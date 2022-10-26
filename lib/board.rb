@@ -27,9 +27,9 @@ class Board
   def valid_coordinate?(coordinate)
     coordinate_names = @cells.keys
     if @cells.keys.include?(coordinate)
-      return true
+      true
     else
-      return false
+      false
     end
   end
 

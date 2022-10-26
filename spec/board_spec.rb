@@ -5,17 +5,14 @@ require './lib/board'
 RSpec.describe Board do
   let(:board) { Board.new }
   it 'exists' do
-
     expect(board).to be_a(Board)
   end
 
   it 'has cells' do
-
     expect(board.cells).to be_a(Hash)
   end
 
   it 'can validate a coordinate' do
-
     expect(board.cells).to be_a(Hash)
     expect(board.valid_coordinate?("A1")).to eq(true)
     expect(board.valid_coordinate?("D4")).to eq(true)
@@ -37,25 +34,21 @@ RSpec.describe Board do
   end
 
   it 'can test if coordinates are horizontal' do
-
     expect(board.horizontal_coordinates(["A1", "A2", "A3"])).to be(true)
     expect(board.horizontal_coordinates(["A1", "B2", "A3"])).to be(false)
   end
 
   it 'can test if coordinates are vertical' do
-
     expect(board.vertical_coordinates(["A1", "B1", "C1"])).to be(true)
     expect(board.vertical_coordinates(["A1", "B2", "A3"])).to be(false)
   end
 
   it 'can check for horiztonal consecutiveness' do
-
     expect(board.consecutive_spaces(["A1", "A2", "A3"])).to be(true)
     expect(board.consecutive_spaces(["A1", "B2", "A3"])).to be(false)
   end
 
   it 'can check for vertical consecutiveness' do
-
     expect(board.consecutive_spaces(["A1", "B1", "C1"])).to be(true)
     expect(board.consecutive_spaces(["A2", "B1", "C1"])).to be(false)
   end

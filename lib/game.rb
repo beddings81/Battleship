@@ -47,7 +47,7 @@ attr_reader :player, :computer, :player_sunk, :computer_sunk
 
   def turn
     puts "=============COMPUTER BOARD============="
-    puts @computer.board.render(true)
+    puts @computer.board.render
     puts "==============PLAYER BOARD=============="
     puts @player.board.render(true)
     until player.computer_sunk == 5 || player.player_sunk == 5

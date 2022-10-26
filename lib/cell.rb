@@ -9,9 +9,9 @@ class Cell
 
   def empty?
     if @ship == nil
-      return true
+      true
     else
-      return false
+      false
     end
   end
 
@@ -32,15 +32,15 @@ class Cell
 
   def render(show_ship = false)
     if fired_upon? == true && empty? == true
-      return "M"
+      "M"
     elsif fired_upon? == true && @ship.sunk? == true && empty? == false
-      return "X"
+      "X"
     elsif fired_upon? == true && empty? == false
-      return "H"
+      "H"
     elsif empty? == false && show_ship == true
-      return "S"
+      "S"
     else
-      return "."
+      "."
     end
   end
 end
